@@ -1,0 +1,19 @@
+﻿services:
+  chatapi:
+    image: chatapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1337:8080"
+    depends_on:
+      - rediska
+  rediska:
+    image: redis:latest
+    container_name: rediska
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=123
+    volumes:
+      - ./redisdata:/data
